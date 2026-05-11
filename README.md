@@ -709,13 +709,8 @@ http://localhost:8501
 Run:
 
 ```bash
-mlflow ui
-```
-
-Open:
-
-```text
-http://localhost:5000
+```bash
+ mlflow ui --backend-store-uri sqlite:///mlflow/mlflow.db   
 ```
 
 ---
