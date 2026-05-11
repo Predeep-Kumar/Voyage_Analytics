@@ -1,0 +1,53 @@
+services:
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+
+    container_name: voyage_api
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      - MLFLOW_TRACKING_URI=sqlite:////app/mlflow/mlflow.db
+      - MLFLOW_ARTIFACT_ROOT=/app/mlruns
+
+    volumes:
+      - ./mlflow:/app/mlflow
+      - ./mlruns:/app/mlruns
+      - ./models:/app/models
+      - ./data:/app/data
+
+    working_dir: /app
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import requests; requests.get('http://localhost:8000').raise_for_status()\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+
+    container_name: voyage_app
+
+    ports:
+      - "8501:8501"
+
+    depends_on:
+      api:
+        condition: service_healthy
+
+    environment:
+      - API_URL=http://api:8000
+
+    working_dir: /app
+
+    restart: unless-stopped

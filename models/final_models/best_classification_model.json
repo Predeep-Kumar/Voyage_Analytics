@@ -1,0 +1,11 @@
+{
+    "model": "Logistic Regression",
+    "type": "Base",
+    "path": "./models/final_models/logistic_regression_base.pkl",
+    "metrics": {
+        "Accuracy": 0.9888888888888888,
+        "Precision": 1.0,
+        "Recall": 0.9777777777777776,
+        "F1 Score": 0.9887640449438202
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "model": "Random Forest",
+    "type": "Tuned",
+    "path": "./models/final_models/random_forest_tuned.pkl",
+    "metrics": {
+        "MAE": 2.0688743398082728e-11,
+        "RMSE": 2.968035224756988e-11,
+        "R2": 1.0
+    },
+    "score": 599985.2896639801
+}
